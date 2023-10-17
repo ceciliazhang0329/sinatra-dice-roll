@@ -1,14 +1,15 @@
 require "sinatra"
 require "sinatra/reloader"
+require "better_errors"
+require "binding_of_caller"
+
+# Need this configuration for better_errors
+use(BetterErrors::Middleware)
+BetterErrors.application_root = __dir__
+BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get '/' do
-  '<h1>Dice Roll</h1>' +
-  '<ul>' +
-    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/2/6" target="_blank">Roll two 6-sided dice</a></li>' +
-    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/2/10" target="_blank">Roll two 10-sided dice</a></li>' +
-    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/1/20" target="_blank">Roll one 20-sided die</a></li>' +
-    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/5/4" target="_blank">Roll five 4-sided dice</a></li>' +
-  '</ul>'
+  erb(:elephant)
 end
 
 get("/zebra") do
@@ -30,8 +31,7 @@ get("/dice/2/6") do
 	
   outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
 	
-  "<h1>2d6</h1>
-   <p>#{outcome}</p>"
+  erb(:two_six)
 end
 
 get("/dice/2/10") do
