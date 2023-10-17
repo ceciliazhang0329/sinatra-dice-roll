@@ -2,7 +2,13 @@ require "sinatra"
 require "sinatra/reloader"
 
 get '/' do
-  "Hello World"
+  '<h1>Dice Roll</h1>' +
+  '<ul>' +
+    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/2/6" target="_blank">Roll two 6-sided dice</a></li>' +
+    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/2/10" target="_blank">Roll two 10-sided dice</a></li>' +
+    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/1/20" target="_blank">Roll one 20-sided die</a></li>' +
+    '<li><a href="https://crispy-disco-q7vjv99454x29w66-4567.app.github.dev/dice/5/4" target="_blank">Roll five 4-sided dice</a></li>' +
+  '</ul>'
 end
 
 get("/zebra") do
@@ -42,7 +48,7 @@ end
 get "/dice/1/20" do
   first_die = rand(1..20)
 
-  outcome = "You rolled a #{first_die}"
+  outcome = "You rolled a #{first_die}."
 
   "<h1>1d20</h1>
   <p>#{outcome}</p>"
